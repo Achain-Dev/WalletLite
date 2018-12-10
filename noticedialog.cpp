@@ -4,8 +4,10 @@
 #include <QFile>
 #include <QDateTime>
 
+#include "macro.h"
 #include "goopal.h"
 #include "datamgr.h"
+
 
 NoticeDialog::NoticeDialog(QWidget *parent) :
     QDialog(parent),
@@ -32,12 +34,12 @@ NoticeDialog::NoticeDialog(QWidget *parent) :
 	QDateTime datetime = QDateTime::currentDateTime();
 	QString datetimeStr = datetime.toString("hh:mm:ss.zzz");
 
-	QString url("");
+	QString url(CDN_URL);
 	QString lang = DataMgr::getInstance()->getLanguage();
 	if (lang == "English")
-		url = url + "http://achain.oss-cn-beijing.aliyuncs.com/wallet_notice/notice" + "_en" + ".html?time=" + datetimeStr;
+		url = url + "wallet_notice/notice" + "_en" + ".html?time=" + datetimeStr;
 	else if (lang == "Simplified Chinese")
-		url = url + "http://achain.oss-cn-beijing.aliyuncs.com/wallet_notice/notice" + "_cn" + ".html?time=" + datetimeStr;
+		url = url + "wallet_notice/notice" + "_cn" + ".html?time=" + datetimeStr;
 
 	webview->setUrl(QUrl(url));
 	webview->showMaximized();
